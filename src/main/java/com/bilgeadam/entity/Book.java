@@ -2,7 +2,10 @@ package com.bilgeadam.entity;
 
 import java.util.List;
 
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,11 +24,11 @@ public class Book {
 	@ManyToOne
 	private Author author;
 	
-	@OneToOne(optional = false)
+	@OneToOne(optional = false,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "book_detail_id", referencedColumnName= "id")
 	private BookDetail detail;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="book_student", joinColumns = @JoinColumn(name ="book_id"),inverseJoinColumns = @JoinColumn(name="student_id") )
 	private List<Student> studentList;
 
@@ -70,6 +73,11 @@ public class Book {
 
 	public void setStudentList(List<Student> studentList) {
 		this.studentList = studentList;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", author=" + author + ", detail=" + detail + "]";
 	}
 	
 	

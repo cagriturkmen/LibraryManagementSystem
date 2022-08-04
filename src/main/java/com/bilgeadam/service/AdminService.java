@@ -1,5 +1,7 @@
 package com.bilgeadam.service;
 
+import java.util.List;
+
 import com.bilgeadam.dao.AdminDao;
 import com.bilgeadam.entity.Admin;
 
@@ -30,8 +32,8 @@ public class AdminService implements IRepository<Admin>{
 	}
 
 	@Override
-	public void listAll() {
-		adminDao.listAll();
+	public List<Admin> listAll() {
+	return	adminDao.listAll();
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,9 +26,15 @@ public class Student extends User {
 	@ManyToMany(mappedBy="studentList")
 	private List<Book> books;
 
+	public Student() {
+		super();
+	}
+	
 	public Student(String username, String password) {
 		super(username, password);
 	}
+		
+
 
 	public List<Book> getBooks() {
 		return books;

@@ -87,9 +87,9 @@ public class AuthorDao implements IRepository<Author> {
 	}
 
 	@Override
-	public void listAll() {
+	public List<Author> listAll() {
 		Session session = null;
-		try {
+		
 			session = databaseConnectionHibernate();
 			String query = "select author from Author as author";
 			TypedQuery<Author> typedQuery = session.createQuery(query,Author.class);
@@ -98,13 +98,7 @@ public class AuthorDao implements IRepository<Author> {
 			for (Author author : authorList) {
 				System.out.println(author);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			session.close();
-		}
-		
-		
+			return authorList;		
 	}
 
 	@Override

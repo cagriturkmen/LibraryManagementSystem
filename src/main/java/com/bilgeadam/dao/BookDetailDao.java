@@ -66,7 +66,7 @@ public class BookDetailDao implements IRepository<BookDetail> {
 				bookDetail.setTitle(entity.getTitle());
 				bookDetail.setBookBorrowDate(entity.getBookBorrowDate());
 				bookDetail.setBorrowed(entity.isBorrowed());
-				bookDetail.setRentalLength(entity.getRentalLength());
+				bookDetail.setBookReturnDate(entity.getBookReturnDate());
 				
 				session = databaseConnectionHibernate();
 				session.getTransaction().begin();
@@ -85,9 +85,9 @@ public class BookDetailDao implements IRepository<BookDetail> {
 	}
 
 	@Override
-	public void listAll() {
+	public List<BookDetail> listAll() {
 		Session session = null;
-		try {
+		
 			session = databaseConnectionHibernate();
 			String query = "select bookDetail from BookDetail as bookDetail";
 			TypedQuery<BookDetail> typedQuery = session.createQuery(query,BookDetail.class);
@@ -95,14 +95,8 @@ public class BookDetailDao implements IRepository<BookDetail> {
 			
 			for (BookDetail bookDetail : bookDetailList) {
 				System.out.println(bookDetail);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			session.close();
-		}
-		
-		
+			}	
+		return bookDetailList;
 	}
 
 	@Override

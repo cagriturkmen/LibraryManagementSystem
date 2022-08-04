@@ -1,5 +1,6 @@
 package com.bilgeadam.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -19,9 +20,9 @@ public class BookDetail {
 	@Column(name="is_borrowed")
 	private boolean isBorrowed;
 	@Column(name="book_borrow_date")
-	private Date bookBorrowDate;
+	private LocalDate bookBorrowDate;
 	@Column(name="rental_length")
-	private int rentalLength;
+	private LocalDate bookReturnDate;
 	
 	@OneToOne(mappedBy="detail")
 	private Book book;
@@ -31,13 +32,13 @@ public class BookDetail {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookDetail(long id, String title, boolean isBorrowed, Date bookBorrowDate, int rentalLength, Book book) {
+	public BookDetail(long id, String title, boolean isBorrowed, LocalDate bookBorrowDate, LocalDate bookReturnDate, Book book) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.isBorrowed = isBorrowed;
 		this.bookBorrowDate = bookBorrowDate;
-		this.rentalLength = rentalLength;
+		this.bookReturnDate = bookReturnDate;
 		this.book = book;
 	}
 
@@ -65,20 +66,20 @@ public class BookDetail {
 		this.isBorrowed = isBorrowed;
 	}
 
-	public Date getBookBorrowDate() {
+	public LocalDate getBookBorrowDate() {
 		return bookBorrowDate;
 	}
 
-	public void setBookBorrowDate(Date bookBorrowDate) {
+	public void setBookBorrowDate(LocalDate bookBorrowDate) {
 		this.bookBorrowDate = bookBorrowDate;
 	}
 
-	public int getRentalLength() {
-		return rentalLength;
+	public LocalDate getBookReturnDate() {
+		return bookReturnDate;
 	}
 
-	public void setRentalLength(int rentalLength) {
-		this.rentalLength = rentalLength;
+	public void setBookReturnDate(LocalDate bookReturnDate) {
+		this.bookReturnDate = bookReturnDate;
 	}
 
 	public Book getBook() {
@@ -87,6 +88,11 @@ public class BookDetail {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	@Override
+	public String toString() {
+		return "BookDetail [id=" + id + ", title=" + title + "]";
 	}
 	
 	

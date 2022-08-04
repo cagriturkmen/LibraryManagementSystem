@@ -83,24 +83,15 @@ public class BookDao implements IRepository<Book> {
 	}
 
 	@Override
-	public void listAll() {
+	public List<Book> listAll() {
 		Session session = null;
-		try {
+		
 			session = databaseConnectionHibernate();
 			String query = "select book from Book as book";
 			TypedQuery<Book> typedQuery = session.createQuery(query,Book.class);
 			List<Book> bookList = typedQuery.getResultList();
 			
-			for (Book book : bookList) {
-				System.out.println(book);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			session.close();
-		}
-		
-		
+		return bookList;				
 	}
 
 	@Override

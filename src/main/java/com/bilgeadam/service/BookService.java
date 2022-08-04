@@ -1,5 +1,7 @@
 package com.bilgeadam.service;
 
+import java.util.List;
+
 import com.bilgeadam.dao.BookDao;
 import com.bilgeadam.entity.Book;
 
@@ -30,8 +32,8 @@ public class BookService implements IRepository<Book>{
 	}
 
 	@Override
-	public void listAll() {
-		bookDao.listAll();
+	public List<Book> listAll() {
+		return bookDao.listAll();
 	}
 
 	@Override

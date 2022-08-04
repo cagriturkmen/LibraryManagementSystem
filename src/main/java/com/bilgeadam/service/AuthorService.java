@@ -1,5 +1,6 @@
 package com.bilgeadam.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.bilgeadam.dao.AuthorDao;
@@ -32,8 +33,8 @@ public class AuthorService implements IRepository<Author>{
 	}
 
 	@Override
-	public void listAll() {
-		authorDao.listAll();
+	public List<Author> listAll() {
+		return authorDao.listAll();
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package com.bilgeadam.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Session;
+import org.hibernate.query.SelectionQuery;
 
 import com.bilgeadam.entity.Student;
 
@@ -83,9 +85,9 @@ public class StudentDao implements IRepository<Student> {
 	}
 
 	@Override
-	public void listAll() {
+	public List<Student> listAll() {
 		Session session = null;
-		try {
+		
 			session = databaseConnectionHibernate();
 			String query = "select stu from Student as stu";
 			TypedQuery<Student> typedQuery = session.createQuery(query,Student.class);
@@ -94,11 +96,7 @@ public class StudentDao implements IRepository<Student> {
 			for (Student student : studentList) {
 				System.out.println(student);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			session.close();
-		}
+		return studentList;
 		
 		
 	}
@@ -122,12 +120,27 @@ public class StudentDao implements IRepository<Student> {
 			
 		} catch (Exception e) {
 			System.out.println("Some problems has occured during Student find operation.");	
-
+			
 		}finally {
 			session.close();
 		}
 		
 		return null;
+	}
+
+	public Optional<Student> findByUsername(String username) {
+		
+		Session session = databaseConnectionHibernate();
+		Student student;
+		String hql= "select stu from Student as stu where stu.username =:un";
+		SelectionQuery<Student> query = (SelectionQuery<Student>) session.createSelectionQuery(hql);
+		query.setParameter("un", username);
+		try {
+			student = query.getSingleResult();
+			return Optional.of(student);
+		}catch(Exception e){
+			return Optional.empty();
+		}
 	}
 
 }

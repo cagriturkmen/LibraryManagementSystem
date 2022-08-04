@@ -82,9 +82,8 @@ public class AdminDao implements IRepository<Admin> {
 	}
 
 	@Override
-	public void listAll() {
+	public List<Admin> listAll() {
 		Session session = null;
-		try {
 			session = databaseConnectionHibernate();
 			String query = "select admin from Admin as admin";
 			TypedQuery<Admin> typedQuery = session.createQuery(query,Admin.class);
@@ -93,13 +92,7 @@ public class AdminDao implements IRepository<Admin> {
 			for (Admin admin : adminList) {
 				System.out.println(admin);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			session.close();
-		}
-		
-		
+			return adminList;		
 	}
 
 	@Override

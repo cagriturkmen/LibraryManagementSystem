@@ -1,9 +1,11 @@
 package com.bilgeadam.util;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import com.bilgeadam.controller.BookController;
 import com.bilgeadam.controller.StudentController;
+import com.bilgeadam.entity.Student;
 
 public class LibrarySystemMenu {
 	
@@ -31,13 +33,30 @@ public class LibrarySystemMenu {
 			adminMenu();
 			break;
 		case 2:
-			//studentLogin
+			studentLogin();
 			break;
 
 		default:
 			break;
 		}
 		
+	}
+	private Student studentLogin() {
+		String username = BAUtils.readString("Lütfen kulanıcı adınızı giriniz.");
+		String password = BAUtils.readString("Lütfen kulanıcı şifrenizi giriniz.");
+		
+		Optional<Student> stu =studentController.findByUsername(username);
+	if(stu.isPresent()) {
+		if(stu.get().getPassword().equals(password)) {
+			studentMenu(stu.get());
+			
+		}else {
+			System.out.println("Kullanıcı adı veya şifresi hatalı");
+		}
+		}else{
+			System.out.println("Kullanıcı adı veya şifresi hatalı");
+		}
+		return stu.get();
 	}
 	private void adminMenu() {
 		
@@ -46,9 +65,11 @@ public class LibrarySystemMenu {
 		menuItems.put(2, "Ogrenci sil");
 		menuItems.put(3, "Kitap ekle");
 		menuItems.put(4, "Kitap sil");
-		menuItems.put(5, "Kitap iade zamanı");
-		menuItems.put(6, "Kitabın kimde olduğu bilgisi");
-		
+		menuItems.put(5, "Tüm kitapları listele");
+		menuItems.put(6, "Kirada olan kitapları listele");
+		menuItems.put(7, "Kitabın kimde oldugu bilgisi");
+		menuItems.put(8, "Kitabın ne zaman döneceği bilgisi");
+
 		int key = BAUtils.menu(menuItems);
 		
 		switch (key) {
@@ -65,10 +86,16 @@ public class LibrarySystemMenu {
 			bookController.delete();
 			break;
 		case 5:
-	
+			bookController.listAll();
 			break;
 		case 6:
-	
+			bookController.listBorrowedBooks();
+			break;
+		case 7:
+			bookController.holderInfo();
+			break;
+		case 8:
+			bookController.returnDate();
 			break;
 
 		default:
@@ -76,4 +103,19 @@ public class LibrarySystemMenu {
 		}
 	}
 	
+	private void studentMenu(Student student) {
+		HashMap<Integer,String> menuItems = new HashMap<>();
+		menuItems.put(1, "Kitap ödünç al");
+		menuItems.put(2, "Kitabı iade et");
+		int key = BAUtils.menu(menuItems);
+		
+		switch (key) {
+		case 1:
+			bookController.borrowBook(student);
+			break;
+		case 2:
+			bookController.returnBook(student);
+			break;
+	}
+	}
 }

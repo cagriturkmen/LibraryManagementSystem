@@ -61,6 +61,11 @@ public class Author {
 	public long getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 	
 	 
 	

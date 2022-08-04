@@ -1,5 +1,7 @@
 package com.bilgeadam.controller;
 
+import java.util.Optional;
+
 import com.bilgeadam.entity.Student;
 import com.bilgeadam.service.StudentService;
 import com.bilgeadam.util.BAUtils;
@@ -46,10 +48,14 @@ public class StudentController {
 	public void listAll() {
 		studentService.listAll();
 	}
+	
 	public Student find() {
 		int id = BAUtils.readInt("Bulmak istediğiniz ogrenci id'sini gir");
 		return studentService.find(id);
 	}
 	
+	public Optional<Student> findByUsername(String username){
+		return studentService.findByUsername(username);
+	}
 	
 }

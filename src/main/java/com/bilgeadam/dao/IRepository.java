@@ -1,8 +1,11 @@
 package com.bilgeadam.dao;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 
+import com.bilgeadam.entity.Admin;
 import com.bilgeadam.util.HibernateSession;
 
 public interface IRepository<T> {
@@ -13,7 +16,7 @@ public interface IRepository<T> {
 	
 	public void update(long id, T entity);
 	
-	public void listAll();
+	public List<T> listAll();
 	
 	public T find(long id);
 	
