@@ -24,7 +24,7 @@ public class Student extends User {
 	
 	@ManyToMany(mappedBy="studentList")
 	private List<Book> books;
-	
+
 	public Student(String username, String password) {
 		super(username, password);
 	}

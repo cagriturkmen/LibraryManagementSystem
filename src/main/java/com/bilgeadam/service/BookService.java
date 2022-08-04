@@ -14,8 +14,9 @@ public class BookService implements IRepository<Book>{
 	}
 
 	@Override
-	public void create(Book entity) {
+	public Book create(Book entity) {
 		bookDao.create(entity);
+		return entity;
 	}
 
 	@Override

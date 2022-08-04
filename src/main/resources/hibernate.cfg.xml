@@ -9,7 +9,7 @@
     <!-- hibernate config -->
 		<property name="showsql">true</property>
 		<property name="connection.autocommit">false</property>
-		<property name="hbm2ddl.auto">create-drop</property>
+		<property name="hbm2ddl.auto">update</property>
             
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>    
         <property name="connection.url">jdbc:postgresql://localhost:5432/library_system</property>    

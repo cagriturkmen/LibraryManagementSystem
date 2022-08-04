@@ -14,8 +14,9 @@ public class StudentService implements IRepository<Student>{
 	}
 
 	@Override
-	public void create(Student entity) {
+	public Student create(Student entity) {
 		studentDao.create(entity);
+		return entity;
 	}
 
 	@Override

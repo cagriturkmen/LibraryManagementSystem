@@ -14,8 +14,9 @@ public class AdminService implements IRepository<Admin>{
 	}
 
 	@Override
-	public void create(Admin entity) {
+	public Admin create(Admin entity) {
 		adminDao.create(entity);
+		return entity;
 	}
 
 	@Override

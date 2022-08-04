@@ -21,6 +21,11 @@ public class Author {
 	private String lastName;
 	@OneToMany(mappedBy="author")
 	private List<Book> books;
+	
+	
+	
+	public Author() {
+	}
 
 	public Author(String firstName, String lastName) {
 		super();

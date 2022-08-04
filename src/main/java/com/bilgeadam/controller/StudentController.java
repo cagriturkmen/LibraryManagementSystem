@@ -27,4 +27,29 @@ public class StudentController {
 		
 	}
 	
+	public void delete() {
+		
+		long id = BAUtils.readInt("Silinmesini istediginiz ogrencinin id'sini giriniz: ");
+		studentService.delete(id);
+	}
+	
+	public void update() {
+		int id = BAUtils.readInt("Guncellenmesini istediginiz ogrencinin id'sini giriniz.");
+		
+		String username = BAUtils.readString("Lutfen guncellemek istediginiz ogrenci cin belirediğiniz kulanıcıadını gir.");
+		String password = BAUtils.readString("Lutfen guncellemek istediginiz ogrenci cin belirediğiniz sifreyi gir.");
+		
+		Student updateStudent =new Student(username,password);
+		studentService.update(id, updateStudent);
+	}
+	
+	public void listAll() {
+		studentService.listAll();
+	}
+	public Student find() {
+		int id = BAUtils.readInt("Bulmak istediğiniz ogrenci id'sini gir");
+		return studentService.find(id);
+	}
+	
+	
 }

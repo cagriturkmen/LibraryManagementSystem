@@ -29,6 +29,10 @@ public class Book {
 	@JoinTable(name="book_student", joinColumns = @JoinColumn(name ="book_id"),inverseJoinColumns = @JoinColumn(name="student_id") )
 	private List<Student> studentList;
 
+	public Book() {
+		
+	}
+
 	public Book(Author author, BookDetail detail, List<Student> studentList) {
 		super();
 		this.author = author;

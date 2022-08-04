@@ -1,5 +1,7 @@
 package com.bilgeadam.service;
 
+import java.util.Optional;
+
 import com.bilgeadam.dao.AuthorDao;
 import com.bilgeadam.entity.Author;
 
@@ -14,8 +16,9 @@ public class AuthorService implements IRepository<Author>{
 	}
 
 	@Override
-	public void create(Author entity) {
+	public Author create(Author entity) {
 		authorDao.create(entity);
+		return entity;
 	}
 
 	@Override
@@ -37,6 +40,11 @@ public class AuthorService implements IRepository<Author>{
 	public Author find(long id) {
 		Author stu= authorDao.find(id);
 		return stu;
+	}
+
+	public Optional<Author> findByName(String firstname, String lastname) {
+		
+		return authorDao.findByName(firstname,lastname);
 	}
 
 }

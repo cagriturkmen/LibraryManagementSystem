@@ -2,7 +2,7 @@ package com.bilgeadam.service;
 
 public interface IRepository<T> {
 	
-	public void create(T entity);
+	public T create(T entity);
 	
 	public void delete(long id);
 	

@@ -1,11 +1,15 @@
 package com.bilgeadam.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Session;
+import org.hibernate.query.SelectionQuery;
 
 import com.bilgeadam.entity.Author;
 
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 public class AuthorDao implements IRepository<Author> {
@@ -128,6 +132,23 @@ public class AuthorDao implements IRepository<Author> {
 		}
 		
 		return null;
+	}
+
+	public Optional<Author> findByName(String firstname, String lastname) {
+		
+		Session session = databaseConnectionHibernate();
+		Author author;
+		String hql = "select a from Author as a where a.firstName =:fn and a.lastName =:ln ";
+		Query query = session.createQuery(hql);
+		query.setParameter("fn", firstname);
+		query.setParameter("ln", lastname);
+		try {
+			author  = (Author) query.getSingleResult();
+			return Optional.of(author);
+		} catch (NoResultException e) {
+			return Optional.empty();
+		}
+		
 	}
 
 }
